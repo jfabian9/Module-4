@@ -1,0 +1,64 @@
+---
+title: "Assignment Module 4"
+author: "Jacob Fabian"
+date: "2022-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+x<-read.lp("Assignment3.lp")
+```
+
+```{r}
+x
+```
+
+```{r}
+solve(x)
+```
+
+```{r}
+get.objective(x)
+get.variables(x)
+```
+
+```{r}
+### I tried to run this formula but know its not correct, was just curious
+###what I am doing wrong
+```
+
+```{r}
+library(lpSolve)
+obj.fun<-c(420,360,300,420,360,300,420,360,300)
+constr<-matrix(c(1,1,1,
+       1,1,1,
+       1,1,1,
+       20,15,12,
+       20,15,12,
+       20,15,12,
+       1,1,1,
+       1,1,1,
+       1,1,1,
+       .0013,-.001,
+       .0013,-.002,
+       nrow=11,byrow=TRUE))
+constr.dir<-c("<=","<=","<=","<=","<=","<=","<=","<=","<=","=","=")
+rhs<-c(750,900,450,13000,12000,5000,900,1200,750,0,0)
+
+probsol<-lp("max",obj.fun,constr,constr.dir,rhs,compute.sens = TRUE)
+probsol$solution
+```
+
+
+
+
